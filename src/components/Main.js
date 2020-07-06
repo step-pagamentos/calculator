@@ -23,6 +23,9 @@ const Main = () => {
 
   return (
     <div className={classes.root}>
+      <Box p={3}>
+        <Typography color="primary" variant="h5" className={classes.heading}>Simule e planeje seus objetivos:</Typography>
+      </Box>
       <TabBar tab={tab} handleChange={handleTabChange} />
       <TabPanel value={tab} index={0}>
         <FormControl className={classes.formControl}>
@@ -53,6 +56,10 @@ const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
+  },
+  heading: {
+    textAlign: 'center',
+    fontWeight: 600,
   },
   root: {
     flexGrow: 1,
