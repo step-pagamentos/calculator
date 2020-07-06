@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
+import Select from './Select';
 import TabBar from './TabBar';
 import TabPanel from './TabPanel';
 
@@ -27,23 +28,24 @@ const Main = () => {
         <Typography color="primary" variant="h5" className={classes.heading}>Simule e planeje seus objetivos:</Typography>
       </Box>
       <TabBar tab={tab} handleChange={handleTabChange} />
-      <TabPanel value={tab} index={0}>
-        <FormControl className={classes.formControl}>
-          <Select
-            value={goal}
-            onChange={handleGoalChange}
-            displayEmpty
-            className={classes.selectEmpty}
-            inputProps={{ 'aria-label': 'Without label' }}
-          >
-            <MenuItem value="Comprar um celular">Comprar um celular</MenuItem>
-            <MenuItem value="Fazer uma viagem">Fazer uma viagem</MenuItem>
-            <MenuItem value="Comprar carro ou moto">Comprar carro ou moro</MenuItem>
-            <MenuItem value="Outro">Outro</MenuItem>
-          </Select>
-        </FormControl>
-        <Box display="flex" style={{ backgroundColor: 'red' }} />
-        <Box style={{ backgroundColor: 'green' }} />
+      <TabPanel className={classes.panel} value={tab} index={0}>
+        <Box pt={3}>
+          <FormControl className={classes.formControl} variant="filled" fullWidth={true}>
+            <Select
+              value={goal}
+              onChange={handleGoalChange}
+              displayEmpty
+              classes={{ icon: classes.icon }}
+              inputProps={{ 'aria-label': 'Without label' }}
+              IconComponent={ExpandMore}
+            >
+              <MenuItem className={classes.menuItem} value="Comprar um celular">Comprar um celular</MenuItem>
+              <MenuItem value="Fazer uma viagem">Fazer uma viagem</MenuItem>
+              <MenuItem value="Comprar carro ou moto">Comprar carro ou moro</MenuItem>
+              <MenuItem value="Outro">Outro</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
       </TabPanel>
       <TabPanel value={tab} index={1}>
         <Typography>Qual a frequência para guardar?</Typography>
@@ -53,10 +55,6 @@ const Main = () => {
 };
 
 const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
   heading: {
     textAlign: 'center',
     fontWeight: 600,
@@ -65,8 +63,9 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
   },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
+  icon: {
+    color: theme.palette.primary.main,
+    paddingRight: 40,
   },
 }));
 
