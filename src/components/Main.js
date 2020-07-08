@@ -14,11 +14,16 @@ import Slider from './Slider';
 
 const Main = () => {
   const classes = useStyles();
-  const [tab, setTab] = useState(0);
+  const [goalTab, setGoalTab] = useState(0);
+  const [timeTab, setTimeTab] = useState(0);
   const [goal, setGoal] = useState('Comprar um celular');
 
-  const handleTabChange = (event, newValue) => {
-    setTab(newValue);
+  const handleGoalTabChange = (event, newValue) => {
+    setGoalTab(newValue);
+  };
+
+  const handleTimeTabChange = (event, newValue) => {
+    setTimeTab(newValue);
   };
 
   const handleGoalChange = (event, newValue) => {
@@ -30,8 +35,8 @@ const Main = () => {
       <Box p={3} textAlign="center">
         <Typography color="primary" variant="h5">Simule e planeje seus objetivos:</Typography>
       </Box>
-      <TabBar tab={tab} handleChange={handleTabChange} />
-      <TabPanel className={classes.panel} value={tab} index={0}>
+      <TabBar borderColor="primary" labels={['Tenho objetivo', 'Só guardar']} tab={goalTab} handleChange={handleGoalTabChange} variant="fullWidth" />
+      <TabPanel value={goalTab} index={0}>
         <Box pt={3}>
           <FormControl className={classes.formControl} variant="filled" fullWidth={true}>
             <Select
@@ -48,23 +53,36 @@ const Main = () => {
               <MenuItem value="Outro">Outro</MenuItem>
             </Select>
           </FormControl>
+          <Grid container>
+            <Grid item md={6} xs={12}>
+              <Box textAlign="center" mt={3}>
+                <Typography color="primary" variant="subtitle2">Quanto custa?</Typography>
+              </Box>
+              <Slider min={100} max={1000000} step={100} type="currency" />
+            </Grid>
+            <Grid item md={6} xs={12}>
+              <Box textAlign="center" mt={3}>
+                <Typography color="primary" variant="subtitle2">Quanto tempo?</Typography>
+              </Box>
+              <Slider min={1} max={60} type="time" />
+            </Grid>
+          </Grid>
+          <Box mt={2}>
+            <TabBar labels={['Semanal', 'Mensal']} handleChange={handleTimeTabChange} tab={timeTab} />
+            <TabPanel value={timeTab} index={0}>
+              <Box pt={3}>
+                <Typography variant="h5">Você precisa guardar R$ 3,83 por semana</Typography>
+              </Box>
+            </TabPanel>
+            <TabPanel value={timeTab} index={1}>
+              <Box pt={3}>
+                <Typography variant="h5">Você precisa guardar R$ 16,60 por mês</Typography>
+              </Box>
+            </TabPanel>
+          </Box>
         </Box>
-        <Grid container>
-          <Grid item xs={12} md={6}>
-            <Box textAlign="center" mt={3}>
-              <Typography color="primary" variant="subtitle2">Quanto custa?</Typography>
-            </Box>
-            <Slider min={100} max={1000000} step={100} type="currency" />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <Box textAlign="center" mt={3}>
-              <Typography color="primary" variant="subtitle2">Quanto tempo?</Typography>
-            </Box>
-            <Slider min={1} max={60} type="time" />
-          </Grid>
-        </Grid>
       </TabPanel>
-      <TabPanel value={tab} index={1}>
+      <TabPanel value={goalTab} index={1}>
         <Typography>Qual a frequência para guardar?</Typography>
       </TabPanel>
     </Container>

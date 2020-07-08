@@ -10,14 +10,14 @@ const a11yProps = index => ({
   'aria-controls': `simple-tabpanel-${index}`,
 });
 
-const TabBar = ({ tab, handleChange }) => {
+const TabBar = ({ borderColor, labels, tab, handleChange, variant }) => {
   const classes = useStyles();
   return (
-    <Box borderBottom={1} className={classes.container}>
+    <Box borderBottom={1} className={borderColor === 'primary' ? classes.container : classes.noBorder}>
       <AppBar elevation={0} className={classes.appBar} position="static">
-        <Tabs variant="fullWidth" indicatorColor="primary" value={tab} onChange={handleChange} aria-label="simple tabs example">
-          <Tab disableRipple label="Tenho objetivo" {...a11yProps(0)} />
-          <Tab disableRipple label="Só guardar" {...a11yProps(1)} />
+        <Tabs variant={variant} indicatorColor="primary" value={tab} onChange={handleChange} aria-label="simple tabs example">
+          <Tab disableRipple label={labels[0]} {...a11yProps(0)} />
+          <Tab disableRipple label={labels[1]} {...a11yProps(1)} />
         </Tabs>
       </AppBar>
     </Box>
@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     borderColor: theme.palette.primary.main,
+  },
+  noBorder: {
+    borderColor: 'transparent',
   },
 }));
 
