@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Slider from '@material-ui/core/Slider';
@@ -88,9 +88,7 @@ const formatTime = (time) => {
   return result
 };
 
-export default ({ min, max, step, type }) => {
-  const [value, setValue] = useState(min);
-
+export default ({ min, max, onChange, step, type, value }) => {
   return (
     <Box mt={2} ml={2} mr={2}>
       <Typography color="primary" variant="subtitle2">
@@ -101,7 +99,7 @@ export default ({ min, max, step, type }) => {
         max={max}
         min={min}
         step={step}
-        onChange={(event, value) => setValue(value)}
+        onChange={onChange}
         defaultValue={1}
       />
     </Box>

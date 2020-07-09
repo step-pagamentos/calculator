@@ -17,6 +17,8 @@ const Main = () => {
   const [goalTab, setGoalTab] = useState(0);
   const [timeTab, setTimeTab] = useState(0);
   const [goal, setGoal] = useState('Comprar um celular');
+  const [price, setPrice] = useState(100);
+  const [time, setTime] = useState(1);
 
   const handleGoalTabChange = (event, newValue) => {
     setGoalTab(newValue);
@@ -28,6 +30,14 @@ const Main = () => {
 
   const handleGoalChange = (event, newValue) => {
     setGoal(newValue);
+  };
+
+  const handlePriceChange = (event, newValue) => {
+    setPrice(newValue);
+  };
+
+  const handleTimeChange = (event, newValue) => {
+    setTime(newValue);
   };
 
   return (
@@ -58,25 +68,27 @@ const Main = () => {
               <Box textAlign="center" mt={3}>
                 <Typography color="primary" variant="subtitle2">Quanto custa?</Typography>
               </Box>
-              <Slider min={100} max={1000000} step={100} type="currency" />
+              <Slider onChange={handlePriceChange} min={100} max={1000000} step={100} type="currency" value={price} />
             </Grid>
             <Grid item md={6} xs={12}>
               <Box textAlign="center" mt={3}>
                 <Typography color="primary" variant="subtitle2">Quanto tempo?</Typography>
               </Box>
-              <Slider min={1} max={60} type="time" />
+              <Slider onChange={handleTimeChange} min={1} max={60} type="time" value={time} />
             </Grid>
           </Grid>
           <Box mt={2}>
             <TabBar labels={['Semanal', 'Mensal']} handleChange={handleTimeTabChange} tab={timeTab} />
             <TabPanel value={timeTab} index={0}>
               <Box pt={3}>
-                <Typography variant="h5">Você precisa guardar R$ 3,83 por semana</Typography>
+                <Typography variant="h5">Você precisa guardar {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price/time/4)} por semana</Typography>
               </Box>
             </TabPanel>
             <TabPanel value={timeTab} index={1}>
               <Box pt={3}>
-                <Typography variant="h5">Você precisa guardar R$ 16,60 por mês</Typography>
+                <Typography variant="h5">
+                  Você precisa guardar {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price/time)} por mês
+                </Typography>
               </Box>
             </TabPanel>
           </Box>
