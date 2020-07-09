@@ -41,7 +41,7 @@ const Main = () => {
   };
 
   const monthlyDeposit = () => {
-    return price / ((Math.pow(1.01856, time)-1)/0.01856);
+    return price / ((Math.pow(1.001856, time)-1)/0.001856);
   };
 
   return (
@@ -78,13 +78,13 @@ const Main = () => {
               <Box textAlign="center" mt={3}>
                 <Typography color="primary" variant="subtitle2">Quanto tempo?</Typography>
               </Box>
-              <Slider onChange={handleTimeChange} min={1} max={60} type="time" value={time} />
+              <Slider onChange={handleTimeChange} min={1} max={12*30} type="time" value={time} />
             </Grid>
           </Grid>
           <Box mt={3} mb={3}>
-              <Typography variant="h5">
-                Você precisa guardar {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(monthlyDeposit())} por mês
-              </Typography>
+            <Typography variant="h5">
+              Você precisaria guardar {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(monthlyDeposit())} por mês na Step
+            </Typography>
           </Box>
         </Box>
       </TabPanel>
