@@ -40,6 +40,10 @@ const Main = () => {
     setTime(newValue);
   };
 
+  const monthlyDeposit = () => {
+    return price / ((Math.pow(1.0225, time)-1)/0.0225);
+  };
+
   return (
     <Container maxWidth={false}>
       <Box p={3} textAlign="center">
@@ -87,7 +91,7 @@ const Main = () => {
             <TabPanel value={timeTab} index={1}>
               <Box pt={3}>
                 <Typography variant="h5">
-                  Você precisa guardar {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price/time)} por mês
+                  Você precisa guardar {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(monthlyDeposit())} por mês
                 </Typography>
               </Box>
             </TabPanel>
