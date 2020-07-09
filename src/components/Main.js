@@ -28,8 +28,8 @@ const Main = () => {
     setTimeTab(newValue);
   };
 
-  const handleGoalChange = (event, newValue) => {
-    setGoal(newValue);
+  const handleGoalChange = (event) => {
+    setGoal(event.target.value);
   };
 
   const handlePriceChange = (event, newValue) => {
@@ -41,7 +41,7 @@ const Main = () => {
   };
 
   const monthlyDeposit = () => {
-    return price / ((Math.pow(1.0225, time)-1)/0.0225);
+    return price / ((Math.pow(1.01856, time)-1)/0.01856);
   };
 
   return (
@@ -61,9 +61,9 @@ const Main = () => {
               inputProps={{ 'aria-label': 'Without label' }}
               IconComponent={ExpandMore}
             >
-              <MenuItem className={classes.menuItem} value="Comprar um celular">Comprar um celular</MenuItem>
+              <MenuItem value="Comprar um celular">Comprar um celular</MenuItem>
               <MenuItem value="Fazer uma viagem">Fazer uma viagem</MenuItem>
-              <MenuItem value="Comprar carro ou moto">Comprar carro ou moro</MenuItem>
+              <MenuItem value="Comprar carro ou moto">Comprar carro ou moto</MenuItem>
               <MenuItem value="Outro">Outro</MenuItem>
             </Select>
           </FormControl>
@@ -81,20 +81,10 @@ const Main = () => {
               <Slider onChange={handleTimeChange} min={1} max={60} type="time" value={time} />
             </Grid>
           </Grid>
-          <Box mt={2}>
-            <TabBar labels={['Semanal', 'Mensal']} handleChange={handleTimeTabChange} tab={timeTab} />
-            <TabPanel value={timeTab} index={0}>
-              <Box pt={3}>
-                <Typography variant="h5">Você precisa guardar {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(price/time/4)} por semana</Typography>
-              </Box>
-            </TabPanel>
-            <TabPanel value={timeTab} index={1}>
-              <Box pt={3}>
-                <Typography variant="h5">
-                  Você precisa guardar {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(monthlyDeposit())} por mês
-                </Typography>
-              </Box>
-            </TabPanel>
+          <Box mt={3} mb={3}>
+              <Typography variant="h5">
+                Você precisa guardar {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(monthlyDeposit())} por mês
+              </Typography>
           </Box>
         </Box>
       </TabPanel>
