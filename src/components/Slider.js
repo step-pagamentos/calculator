@@ -61,11 +61,17 @@ const formatValue = (value, type) => {
   switch (type) {
     case 'currency':
       return Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
+    case 'tax':
+      return formatTax(value);
     case 'time':
       return formatTime(value);
     default:
       return;
   }
+};
+
+const formatTax = (tax) => {
+  return `${tax}%`;
 };
 
 const formatTime = (time) => {
@@ -88,7 +94,7 @@ const formatTime = (time) => {
   return result
 };
 
-export default ({ min, max, onChange, step, type, value }) => {
+export default ({ defaultValue, min, max, onChange, step, type, value }) => {
   return (
     <Box mt={2} ml={2} mr={2}>
       <Typography color="primary" variant="subtitle2">
@@ -100,7 +106,7 @@ export default ({ min, max, onChange, step, type, value }) => {
         min={min}
         step={step}
         onChange={onChange}
-        defaultValue={1}
+        defaultValue={defaultValue}
       />
     </Box>
   );

@@ -1,47 +1,29 @@
 import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid';
-import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
-import Select from './Select';
-import TabBar from './TabBar';
-import TabPanel from './TabPanel';
 import Slider from './Slider';
 
 const Main = () => {
-  const classes = useStyles();
-  const [goalTab, setGoalTab] = useState(0);
-  const [timeTab, setTimeTab] = useState(0);
-  const [goal, setGoal] = useState('Comprar um celular');
-  const [price, setPrice] = useState(100);
-  const [time, setTime] = useState(1);
+  const [income, setIncome] = useState(1000);
+  const [tax, setTax] = useState(10);
+  const [time, setTime] = useState(12*30);
 
-  const handleGoalTabChange = (event, newValue) => {
-    setGoalTab(newValue);
+  const handleIncomeChange = (event, newValue) => {
+    setIncome(newValue);
   };
 
-  const handleTimeTabChange = (event, newValue) => {
-    setTimeTab(newValue);
-  };
-
-  const handleGoalChange = (event) => {
-    setGoal(event.target.value);
-  };
-
-  const handlePriceChange = (event, newValue) => {
-    setPrice(newValue);
+  const handleTaxChange = (event, newValue) => {
+    setTax(newValue);
   };
 
   const handleTimeChange = (event, newValue) => {
     setTime(newValue);
   };
 
-  const monthlyDeposit = () => {
-    return price / ((Math.pow(1.001856, time)-1)/0.001856);
+  const futureValue = () => {
+    return income*(tax/100) * [Math.pow((1+0.001856), time) - 1] / 0.001856;
   };
 
   return (
@@ -49,63 +31,45 @@ const Main = () => {
       <Box p={3} textAlign="center">
         <Typography color="primary" variant="h5">Simule e planeje seus objetivos:</Typography>
       </Box>
-      <TabBar borderColor="primary" labels={['Tenho objetivo', 'Só guardar']} tab={goalTab} handleChange={handleGoalTabChange} variant="fullWidth" />
-      <TabPanel value={goalTab} index={0}>
-        <Box pt={3}>
-          <FormControl className={classes.formControl} variant="filled" fullWidth={true}>
-            <Select
-              value={goal}
-              onChange={handleGoalChange}
-              displayEmpty
-              classes={{ icon: classes.select.icon }}
-              inputProps={{ 'aria-label': 'Without label' }}
-              IconComponent={ExpandMore}
-            >
-              <MenuItem value="Comprar um celular">Comprar um celular</MenuItem>
-              <MenuItem value="Fazer uma viagem">Fazer uma viagem</MenuItem>
-              <MenuItem value="Comprar carro ou moto">Comprar carro ou moto</MenuItem>
-              <MenuItem value="Outro">Outro</MenuItem>
-            </Select>
-          </FormControl>
-          <Grid container>
-            <Grid item md={6} xs={12}>
-              <Box textAlign="center" mt={3}>
-                <Typography color="primary" variant="subtitle2">Quanto custa?</Typography>
-              </Box>
-              <Slider onChange={handlePriceChange} min={100} max={1000000} step={100} type="currency" value={price} />
-            </Grid>
-            <Grid item md={6} xs={12}>
-              <Box textAlign="center" mt={3}>
-                <Typography color="primary" variant="subtitle2">Quanto tempo?</Typography>
-              </Box>
-              <Slider onChange={handleTimeChange} min={1} max={12*30} type="time" value={time} />
-            </Grid>
-          </Grid>
-          <Box mt={3} mb={3}>
-            <Typography variant="h5">
-              Você precisaria guardar {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(monthlyDeposit())} por mês na Step
-            </Typography>
+      <Grid container>
+        <Grid item md={12} xs={12}>
+          <Box textAlign="center" mt={1}>
+            <Typography color="primary" variant="subtitle2">Qual a sua renda mensal?</Typography>
           </Box>
-        </Box>
-      </TabPanel>
-      <TabPanel value={goalTab} index={1}>
-        <Typography>Qual a frequência para guardar?</Typography>
-      </TabPanel>
+          <Slider onChange={handleIncomeChange} min={500} max={50000} step={500} type="currency" value={income} defaultValue={1000} />
+        </Grid>
+        <Grid item md={6} xs={12}>
+          <Box textAlign="center" mt={3}>
+            <Typography color="primary" variant="subtitle2">Quanto gostaria de guardar por mês?</Typography>
+          </Box>
+          <Slider onChange={handleTaxChange} min={1} max={10} step={1} type="tax" value={tax} defaultValue={10} />
+        </Grid>
+        <Grid item md={6} xs={12}>
+          <Box textAlign="center" mt={3}>
+            <Typography color="primary" variant="subtitle2">Por quanto tempo?</Typography>
+          </Box>
+          <Slider defaultValue={30*12} onChange={handleTimeChange} min={1} max={12*30} type="time" value={time} />
+        </Grid>
+      </Grid>
+      <Box ml={2} mt={3} mb={2}>
+        <Typography variant="h4">
+          Você terá
+          <Typography variant="span" color="primary">
+            {` ${Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(futureValue())} `}
+          </Typography>
+          na Step
+        </Typography>
+      </Box>
+      <Box ml={2} mb={3}>
+        <Typography variant="h4" textAlign="center">
+          Seu $ parado {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(income * (tax / 100) * time)}
+          <Typography variant="caption" color="error">
+            {` (-${Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(futureValue() - (income * (tax / 100) * time))})`}
+          </Typography>
+        </Typography>
+      </Box>
     </Container>
   );
 };
-
-const useStyles = makeStyles((theme) => ({
-  select: {
-    icon: {
-      color: theme.palette.primary.main,
-      paddingRight: 40,
-    },
-  },
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
 
 export default Main;
