@@ -29,18 +29,18 @@ const Main = () => {
   return (
     <Container maxWidth={false}>
       <Box p={2}>
-        <Typography color="primary" variant="h4">Simule e planeje seus objetivos:</Typography>
+        <Typography color="primary" variant="h2">Simule e planeje seus objetivos:</Typography>
       </Box>
       <Box p={2}>
-        <Typography color="primary" variant="subtitle2">Quanto você gasta por mês?</Typography>
+        <Typography variant="h4">Quanto você gasta por mês?</Typography>
       </Box>
       <Slider onChange={handleIncomeChange} min={500} max={50000} step={500} type="currency" value={income} defaultValue={1000} />
       <Box p={2}>
-        <Typography color="primary" variant="subtitle2">Quanto gostaria de guardar por mês?</Typography>
+        <Typography variant="h4">Quanto gostaria de guardar por mês?</Typography>
       </Box>
       <Slider onChange={handleTaxChange} min={1} max={10} step={1} type="tax" value={tax} defaultValue={10} />
-      <Box mt={3} p={2}>
-        <Typography color="primary" variant="subtitle2">Por quanto tempo?</Typography>
+      <Box p={2}>
+        <Typography variant="h4">Por quanto tempo?</Typography>
       </Box>
       <Slider defaultValue={30*12} onChange={handleTimeChange} min={1} max={12*30} type="time" value={time} />
       <Box ml={2} mt={3} mb={2}>

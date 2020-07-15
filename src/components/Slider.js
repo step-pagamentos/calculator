@@ -9,7 +9,7 @@ const iOSBoxShadow =
 
 const IOSSlider = withStyles((theme) => ({
   root: {
-    color: theme.palette.primary.main,
+    color: 'black',
     height: 2,
     padding: '15px 0',
   },
@@ -43,7 +43,7 @@ const IOSSlider = withStyles((theme) => ({
   rail: {
     height: 2,
     opacity: 0.5,
-    backgroundColor: '#bfbfbf',
+    backgroundColor: '#e0e0e0',
   },
   mark: {
     backgroundColor: '#bfbfbf',
@@ -97,7 +97,7 @@ const formatTime = (time) => {
 export default ({ defaultValue, min, max, onChange, step, type, value }) => {
   return (
     <Box mt={2} ml={2} mr={2}>
-      <Typography color="primary" variant="subtitle2">
+      <Typography variant="h5">
         {formatValue(value, type)}
       </Typography>
       <IOSSlider
