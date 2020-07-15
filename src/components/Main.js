@@ -28,18 +28,18 @@ const Main = () => {
 
   return (
     <Container maxWidth={false}>
-      <Box p={3} textAlign="center">
-        <Typography color="primary" variant="h5">Simule e planeje seus objetivos:</Typography>
+      <Box p={2}>
+        <Typography color="primary" variant="h4">Simule e planeje seus objetivos:</Typography>
       </Box>
-      <Box textAlign="center" mt={1}>
+      <Box p={2}>
         <Typography color="primary" variant="subtitle2">Quanto você gasta por mês?</Typography>
       </Box>
       <Slider onChange={handleIncomeChange} min={500} max={50000} step={500} type="currency" value={income} defaultValue={1000} />
-      <Box textAlign="center" mt={3}>
+      <Box p={2}>
         <Typography color="primary" variant="subtitle2">Quanto gostaria de guardar por mês?</Typography>
       </Box>
       <Slider onChange={handleTaxChange} min={1} max={10} step={1} type="tax" value={tax} defaultValue={10} />
-      <Box textAlign="center" mt={3}>
+      <Box mt={3} p={2}>
         <Typography color="primary" variant="subtitle2">Por quanto tempo?</Typography>
       </Box>
       <Slider defaultValue={30*12} onChange={handleTimeChange} min={1} max={12*30} type="time" value={time} />
@@ -53,7 +53,7 @@ const Main = () => {
         </Typography>
       </Box>
       <Box ml={2} mb={3}>
-        <Typography variant="h4" textAlign="center">
+        <Typography variant="h6">
           Seu $ parado {Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(income * (tax / 100) * time)}
           <Typography variant="caption" color="error">
             {` (-${Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(futureValue() - (income * (tax / 100) * time))})`}
