@@ -5,7 +5,7 @@ import Main from './components/Main';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#1BD760',
+      main: '#FFFFFF',
     },
   },
   typography: {

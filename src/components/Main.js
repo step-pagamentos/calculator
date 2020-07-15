@@ -31,26 +31,18 @@ const Main = () => {
       <Box p={3} textAlign="center">
         <Typography color="primary" variant="h5">Simule e planeje seus objetivos:</Typography>
       </Box>
-      <Grid container>
-        <Grid item md={12} xs={12}>
-          <Box textAlign="center" mt={1}>
-            <Typography color="primary" variant="subtitle2">Quanto você gasta por mês?</Typography>
-          </Box>
-          <Slider onChange={handleIncomeChange} min={500} max={50000} step={500} type="currency" value={income} defaultValue={1000} />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <Box textAlign="center" mt={3}>
-            <Typography color="primary" variant="subtitle2">Quanto gostaria de guardar por mês?</Typography>
-          </Box>
-          <Slider onChange={handleTaxChange} min={1} max={10} step={1} type="tax" value={tax} defaultValue={10} />
-        </Grid>
-        <Grid item md={6} xs={12}>
-          <Box textAlign="center" mt={3}>
-            <Typography color="primary" variant="subtitle2">Por quanto tempo?</Typography>
-          </Box>
-          <Slider defaultValue={30*12} onChange={handleTimeChange} min={1} max={12*30} type="time" value={time} />
-        </Grid>
-      </Grid>
+      <Box textAlign="center" mt={1}>
+        <Typography color="primary" variant="subtitle2">Quanto você gasta por mês?</Typography>
+      </Box>
+      <Slider onChange={handleIncomeChange} min={500} max={50000} step={500} type="currency" value={income} defaultValue={1000} />
+      <Box textAlign="center" mt={3}>
+        <Typography color="primary" variant="subtitle2">Quanto gostaria de guardar por mês?</Typography>
+      </Box>
+      <Slider onChange={handleTaxChange} min={1} max={10} step={1} type="tax" value={tax} defaultValue={10} />
+      <Box textAlign="center" mt={3}>
+        <Typography color="primary" variant="subtitle2">Por quanto tempo?</Typography>
+      </Box>
+      <Slider defaultValue={30*12} onChange={handleTimeChange} min={1} max={12*30} type="time" value={time} />
       <Box ml={2} mt={3} mb={2}>
         <Typography variant="h4">
           Você terá
