@@ -34,7 +34,7 @@ const Main = () => {
       <Grid container>
         <Grid item md={12} xs={12}>
           <Box textAlign="center" mt={1}>
-            <Typography color="primary" variant="subtitle2">Qual a sua renda mensal?</Typography>
+            <Typography color="primary" variant="subtitle2">Quanto você gasta por mês?</Typography>
           </Box>
           <Slider onChange={handleIncomeChange} min={500} max={50000} step={500} type="currency" value={income} defaultValue={1000} />
         </Grid>
