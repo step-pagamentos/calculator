@@ -94,7 +94,7 @@ const formatTime = (time) => {
   return result
 };
 
-export default ({ defaultValue, min, max, onChange, step, type, value }) => {
+export default ({ defaultValue, marks, min, max, onChange, step, type, value }) => {
   return (
     <Box mt={2} ml={2} mr={2}>
       <Typography variant="h5">
@@ -102,6 +102,7 @@ export default ({ defaultValue, min, max, onChange, step, type, value }) => {
       </Typography>
       <IOSSlider
         aria-label="ios slider"
+        marks={marks}
         max={max}
         min={min}
         step={step}

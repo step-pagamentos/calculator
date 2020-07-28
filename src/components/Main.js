@@ -9,6 +9,20 @@ const Main = () => {
   const [income, setIncome] = useState(1000);
   const [tax, setTax] = useState(10);
   const [time, setTime] = useState(12*30);
+  const marks = [
+    {
+      value: 5,
+      label: '5%',
+    },
+    {
+      value: 10,
+      label: '10%',
+    },
+    {
+      value: 20,
+      label: '20%',
+    },
+  ];
 
   const handleIncomeChange = (event, newValue) => {
     setIncome(newValue);
@@ -38,7 +52,7 @@ const Main = () => {
       <Box p={2}>
         <Typography variant="h4">Quanto gostaria de guardar por mês?</Typography>
       </Box>
-      <Slider onChange={handleTaxChange} min={1} max={10} step={1} type="tax" value={tax} defaultValue={10} />
+      <Slider onChange={handleTaxChange} marks={marks} min={5} max={20} step={null} type="tax" value={tax} defaultValue={20} />
       <Box p={2}>
         <Typography variant="h4">Por quanto tempo?</Typography>
       </Box>
